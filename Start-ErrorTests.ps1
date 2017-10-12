@@ -12,5 +12,6 @@ foreach ($name in $ErrorExampleFunctions){
         $outputTrackerDataObject | Add-Member -Type NoteProperty -Name ExitCode -Value $lastexitcode
         $outputTrackerData+=$outputTrackerDataObject
         $Error.Clear()
+        Remove-Item $PSScriptRoot\object.xml -Force
     }
 }

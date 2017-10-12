@@ -15,8 +15,8 @@ function Test-ErrorCustom {
     Write-Host "Executing custom error with return"
     1/$divideBy
     if (!$?){
-        $errObj = new-object System.Management.Automation.ItemNotFoundException "Omigosh you tried to divide by 0?"
-        $category = [System.Management.Automation.ErrorCategory]::ObjectNotFound
+        $errObj = new-object System.Management.Automation.RuntimeException "Omigosh you tried to divide by 0?"
+        $category = [System.Management.Automation.ErrorCategory]::NotSpecified
         $errRecord = new-object System.Management.Automation.ErrorRecord $errObj, "PathNotFound", $category, $divideBy
         $psCmdlet.WriteError($errRecord)
 
