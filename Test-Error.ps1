@@ -1,5 +1,5 @@
 param(
-	[ValidateSet("Test-ErrorCustom","Test-ErrorCustomBroken","Test-ErrorWriteErrorThrowString","Test-ErrorWriteErrorThrowObject","Test-ErrorWriteErrorErrActionStop","Test-ErrorWriteErrorErrActionStopTryCatch","Test-ErrorWriteErrorErrActionStopSimpleFunction","Test-ErrorWriteErrorErrActionStopSimpleFunctionWithERRStringConversion")] 
+	[ValidateSet("Test-ErrorCustom","Test-ErrorCustomBroken","Test-ErrorWriteErrorThrowString","Test-ErrorWriteErrorThrowObject","Test-ErrorWriteErrorErrActionStop","Test-ErrorWriteErrorReturn","Test-ErrorWriteErrorReturnTryCatch","Test-ErrorWriteErrorErrActionStopTryCatch","Test-ErrorWriteErrorErrActionStopSimpleFunction","Test-ErrorWriteErrorErrActionStopSimpleFunctionWithERRStringConversion")] 
     [string]$testFunction,
     [ValidateSet("dollarQuestionCapture","tryCatchCapture")]
     [string]$testType,
@@ -58,6 +58,32 @@ function Test-ErrorWriteErrorThrowObject {
         Write-Error "here is my error in my function"
         Throw [System.Management.Automation.ValidationMetadataException] "I returned an error and I'm so proud."
     }
+}
+
+function Test-ErrorWriteErrorReturn {
+    [CmdletBinding()]
+    Param([Parameter(Position=0,mandatory=$false)][int]$divideBy=0)
+
+    Write-Host "Executing Write-Error with ErrorAction Stop using Try/Catch"
+	1/$divideBy
+    if (!$?){
+        Write-error "here is my error in my function using dollarquestion and return for stdout"
+        return "Hey buddy you had an error that you should check out"
+    }
+	write-host "We got past the error" -foregroundcolor green
+}
+
+function Test-ErrorWriteErrorReturnTryCatch {
+    [CmdletBinding()]
+    Param([Parameter(Position=0,mandatory=$false)][int]$divideBy=0)
+
+    Write-Host "Executing Write-Error with ErrorAction Stop using Try/Catch"
+	try {1/$divideBy}
+	catch {
+        Write-error "here is my error in my function using try/catch and return for stdout"
+        return "Hey buddy you had an error that you should check out"
+    }
+	write-host "We got past the error" -foregroundcolor green
 }
 
 function Test-ErrorWriteErrorErrActionStop {

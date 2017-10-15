@@ -1,6 +1,6 @@
 param([switch]$enableErrorOutput)
 
-$ErrorExampleFunctions="Test-ErrorCustom","Test-ErrorCustomBroken","Test-ErrorWriteErrorThrowString","Test-ErrorWriteErrorThrowObject","Test-ErrorWriteErrorErrActionStop","Test-ErrorWriteErrorErrActionStopTryCatch","Test-ErrorWriteErrorErrActionStopSimpleFunction","Test-ErrorWriteErrorErrActionStopSimpleFunctionWithERRStringConversion"
+$ErrorExampleFunctions="Test-ErrorCustom","Test-ErrorCustomBroken","Test-ErrorWriteErrorThrowString","Test-ErrorWriteErrorThrowObject","Test-ErrorWriteErrorErrActionStop","Test-ErrorWriteErrorReturn","Test-ErrorWriteErrorReturnTryCatch","Test-ErrorWriteErrorErrActionStopTryCatch","Test-ErrorWriteErrorErrActionStopSimpleFunction","Test-ErrorWriteErrorErrActionStopSimpleFunctionWithERRStringConversion"
 $ErrorExecutionTypes="dollarQuestionCapture","tryCatchCapture"
 if ($outputTrackerData){Remove-Variable outputTrackerData -Scope Global}
 
